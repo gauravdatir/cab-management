@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cabsys.cabManagement.CabEventLog;
 import com.cabsys.cabManagement.CabStateMachine;
+import com.cabsys.cabManagement.CabStateMachine.CabEvent;
 import com.cabsys.cabManagement.CabStateMachine.CabStates;
 import com.cabsys.cabManagement.CabSystem;
 import com.cabsys.CabManagementService.CabEventLogService;
@@ -60,12 +61,20 @@ public class CabManagementController {
 	@PostMapping ("/login")
 	public CabStates login(@RequestBody int id)
 	{
+		CabEventLog cabEvent = new CabEventLog();
+		cabEvent.setEvent(CabEvent.CAB_LOGIN);
+		cabEvent.setCab_id(id);
+		cabEventLogService.saveOrUpdate(cabEvent);
 		return cabManagementService.setCabStateById(id, CabStates.IDLE);
 	}
 	
 	@PostMapping ("/logout")
 	public CabStates logout(@RequestBody int id)
 	{
+		CabEventLog cabEvent = new CabEventLog();
+		cabEvent.setEvent(CabEvent.CAB_LOGOFF);
+		cabEvent.setCab_id(id);
+		cabEventLogService.saveOrUpdate(cabEvent);
 		return cabManagementService.setCabStateById(id, CabStates.OFFLINE);
 	}
 	
