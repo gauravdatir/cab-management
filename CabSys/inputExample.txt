@@ -1,0 +1,74 @@
+
+Cab Registration
+http://localhost:8080/CabSystem/
+
+POST
+
+Body
+{
+  "cab_State": "IDLE",
+  "city_Id": "Mumbai",
+  "cabLocation": "Wakad",
+  "iddle_Time": 0,
+  "trip_count": 0,
+  "iddle_start": 1613901499283,
+  "driverName": "erty"
+}
+
+
+Cab login:
+http://localhost:8080/CabSystem/login
+POST
+Body
+{id}
+
+Cab Logout:
+http://localhost:8080/CabSystem/logout
+POST
+Body
+{id}
+
+
+Change current City:
+http://localhost:8080/CabSystem/{cab Id}/city_Id
+PUT
+Body
+{city}
+
+
+Change state of cab :
+http://localhost:8080/CabSystem/{cab id}/cab_State
+PUT
+Body
+{state id}
+
+
+To book a cab :
+
+http://localhost:8080/CabBooking
+POST
+
+{
+  "city_Id": "Pune",
+  "cabLocation":"Wakad",
+  "destination_city":"Mumbai",
+  "request_time":0
+}
+
+Response: cab details
+
+
+To send event as CAB_LOGIN,
+		CAB_LOGOFF,
+		TRIP_REQUESTED,
+		TRIP_COMPLETED,
+		CAB_FAULT
+
+
+Body:
+
+{
+  "event": 3,
+  "cab_id": 4,
+  "request_id":9  (optiponal)
+}
